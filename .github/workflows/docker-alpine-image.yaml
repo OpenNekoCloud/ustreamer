@@ -1,6 +1,7 @@
 name: Build Alpine
 
 on:
+    workflow_dispatch:
     push:
         branches: [master, build_*]
         tags: [v*]
