@@ -28,6 +28,7 @@ typedef struct {
 
 	char	*audio_dev_name;
 	char	*tc358743_dev_path;
+	char	*tc358743_audio_hz;
 } us_config_s;
 
 

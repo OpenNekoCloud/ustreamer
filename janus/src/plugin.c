@@ -204,6 +204,17 @@ static int _check_tc358743_audio(uint *audio_hz) {
 		US_JLOG_PERROR("audio", "Can't open TC358743 V4L2 device");
 		return -1;
 	}
+	if (_g_config->tc358743_audio_hz != NULL) {
+		*audio_hz = atoi(_g_config->tc358743_audio_hz);
+		if (*audio_hz == 0) {
+			US_JLOG_ERROR("audio", "Invalid TC358743 audio Hz");
+			close(fd);
+			return -1;
+		}
+		US_JLOG_INFO("audio", "TC358743 audio forced to %u Hz", *audio_hz);
+		close(fd);
+		return 0;
+	}
 	const int checked = us_tc358743_xioctl_get_audio_hz(fd, audio_hz);
 	if (checked < 0) {
 		US_JLOG_PERROR("audio", "Can't check TC358743 audio state (%d)", checked);

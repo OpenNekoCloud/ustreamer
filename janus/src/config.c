@@ -67,6 +67,7 @@ us_config_s *us_config_init(const char *config_dir_path) {
 			US_JLOG_INFO("config", "Missing config value: audio.tc358743");
 			goto error;
 		}
+		config->tc358743_audio_hz = _get_value(jcfg, "audio", "hz");
 	}
 
 	goto ok;

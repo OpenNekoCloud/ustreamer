@@ -64,6 +64,11 @@ override _USTR_LDFLAGS += -lsystemd
 override _USTR_SRCS += $(shell ls ustreamer/http/systemd/*.c)
 endif
 
+ifneq ($(call optbool,$(WITH_LIBX264)),)
+override _CFLAGS += -DWITH_LIBX264
+override _USTR_LDFLAGS += -lx264 -lyuv
+override _USTR_SRCS += $(shell ls ustreamer/encoders/libx264/*.c)
+endif
 
 WITH_PTHREAD_NP ?= 1
 ifneq ($(call optbool,$(WITH_PTHREAD_NP)),)
